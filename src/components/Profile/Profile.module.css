@@ -1,0 +1,9 @@
+
+.contentBg{
+    height: 170px;
+    background: url("../../img/content_header.png") no-repeat center center;
+}
+.content img{
+    height: 200px;
+    margin: 0 auto;
+}
