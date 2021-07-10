@@ -15,7 +15,7 @@ type ArrayPostsDataType ={
     likesCount: number
 }
 
-type ArrayDialogstype ={
+type ArrayDialogsType ={
     id: number
     name: string
 }
@@ -25,13 +25,19 @@ type ArrayMessagesType ={
     message: string
 }
 
-type appType = {
-    postsData: Array<ArrayPostsDataType>
-    dialogs: Array<ArrayDialogstype>
-    messages: Array<ArrayMessagesType>
+type AppPropsType = {
+    state: {
+        profilePage: {
+            postsData: Array<ArrayPostsDataType>
+        }
+        dialogsPage: {
+            dialogs: Array<ArrayDialogsType>
+            messages: Array<ArrayMessagesType>
+        }
+    }
 }
 
-function App(props:appType) {
+function App(props:AppPropsType) {
 
     return (
         <BrowserRouter>
@@ -40,9 +46,9 @@ function App(props:appType) {
                 <Navbar/>
                 <div className='content'>
                     <Redirect from='/' to='/profile'/>
-                    <Route path='/profile' render={() => <Profile postsData={props.postsData} />}/>
-                    <Route path='/dialogs' render={() => <Dialogs dialogs={props.dialogs}
-                                                                  messages={props.messages} />}/>
+
+                    <Route path='/profile' render={() => <Profile state={props.state.profilePage} />}/>
+                    <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/setting' render={() => <Setting/>}/>

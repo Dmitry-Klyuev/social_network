@@ -10,7 +10,9 @@ type ArrayProfileType ={
 }
 
 type profileType ={
-    postsData: Array<ArrayProfileType>
+    state: {
+        postsData: Array<ArrayProfileType>
+    }
 }
 
 export function Profile(props:profileType) {
@@ -18,7 +20,7 @@ export function Profile(props:profileType) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postsData={props.postsData}
+            <MyPosts postsData={props.state.postsData}
             />
         </div>
     )
