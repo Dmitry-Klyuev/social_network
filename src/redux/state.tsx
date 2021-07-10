@@ -22,4 +22,13 @@ let state = {
     sidebar: {}
 }
 
+export let addPost = (postMessage:string | undefined) => {
+    if (postMessage){
+        state.profilePage.postsData.push({id: 5,
+            message: postMessage,
+            likesCount: 0
+        })
+    }
+}
+
 export default state;

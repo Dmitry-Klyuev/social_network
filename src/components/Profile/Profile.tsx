@@ -13,6 +13,7 @@ type profileType ={
     state: {
         postsData: Array<ArrayProfileType>
     }
+    addPost: (postMessage:string | undefined) => void
 }
 
 export function Profile(props:profileType) {
@@ -21,6 +22,7 @@ export function Profile(props:profileType) {
         <div>
             <ProfileInfo/>
             <MyPosts postsData={props.state.postsData}
+                     addPost={props.addPost}
             />
         </div>
     )

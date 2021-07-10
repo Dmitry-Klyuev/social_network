@@ -9,6 +9,7 @@ type ArrayMyPostsType = {
 }
 type myPostsType = {
     postsData: Array<ArrayMyPostsType>
+    addPost: (postMessage:string | undefined) => void
 }
 
 export function MyPosts(props: myPostsType) {
@@ -18,7 +19,7 @@ export function MyPosts(props: myPostsType) {
     let post = props.postsData.map(p => <Post message={p.message} likeCount={p.likesCount}/>)
     let onAddPost = () => {
         let text = newPostElement.current?.value
-        alert(text)
+        props.addPost(text)
     }
 
     return (
