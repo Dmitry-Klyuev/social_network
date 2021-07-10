@@ -13,21 +13,27 @@ type myPostsType = {
 
 export function MyPosts(props: myPostsType) {
 
+    let newPostElement = React.createRef<HTMLInputElement>()
+
     let post = props.postsData.map(p => <Post message={p.message} likeCount={p.likesCount}/>)
+    let onAddPost = () => {
+        let text = newPostElement.current?.value
+        alert(text)
+    }
 
     return (
         <div className={s.myPosts}>
             <div>
                 <h3>My post</h3>
-                <div>
+                <div >
                     New post
                 </div>
                 <div>  {/*ниже пойдут посты*/}
                     <div>
-                        <input type="text"/>
+                        <input type="text" ref={newPostElement}/>
                     </div>
                     <div>
-                        <button>Add post</button>
+                        <button onClick={ onAddPost}>Add post</button>
                     </div>
                     {/*Выводим посты с лайками*/}
                     {post}
