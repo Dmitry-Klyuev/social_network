@@ -26,7 +26,7 @@ type ArrayMessagesType ={
     message: string
 }
 
-type AppPropsType = {
+export type AppPropsType = {
     state: {
         profilePage: {
             postsData: Array<ArrayPostsDataType>

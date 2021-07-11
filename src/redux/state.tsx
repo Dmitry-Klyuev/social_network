@@ -1,3 +1,5 @@
+import {renderEntireTree} from "../render";
+
 let state = {
     profilePage: {
         postsData: [
@@ -22,13 +24,13 @@ let state = {
     sidebar: {}
 }
 
-export let addPost = (postMessage:string | undefined) => {
-    if (postMessage){
-        state.profilePage.postsData.push({id: 5,
+export let addPost = (postMessage:string) => {
+            state.profilePage.postsData.push({id: 5,
             message: postMessage,
             likesCount: 0
         })
-    }
+        renderEntireTree(state)
+
 }
 
 export default state;

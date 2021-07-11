@@ -1,5 +1,4 @@
 import React from "react";
-import s from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
@@ -13,7 +12,7 @@ type profileType ={
     state: {
         postsData: Array<ArrayProfileType>
     }
-    addPost: (postMessage:string | undefined) => void
+    addPost: (postMessage:string) => void
 }
 
 export function Profile(props:profileType) {
