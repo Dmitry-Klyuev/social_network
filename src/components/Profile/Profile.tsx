@@ -2,17 +2,19 @@ import React from "react";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
-type ArrayProfileType ={
+type ArrayMyPostsType ={
     id: number
     message: string
     likesCount: number
 }
 
 type profileType ={
-    state: {
-        postsData: Array<ArrayProfileType>
+    profilePage: {
+        postsData: Array<ArrayMyPostsType>
+        newPostText: string
     }
-    addPost: (postMessage:string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string)=> void
 }
 
 export function Profile(props:profileType) {
@@ -20,8 +22,9 @@ export function Profile(props:profileType) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postsData={props.state.postsData}
+            <MyPosts profilePage={props.profilePage}
                      addPost={props.addPost}
+                     updateNewPostText={props.updateNewPostText}
             />
         </div>
     )

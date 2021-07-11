@@ -8,21 +8,28 @@ type ArrayMyPostsType = {
     likesCount: number
 }
 type myPostsType = {
-    postsData: Array<ArrayMyPostsType>
-    addPost: (postMessage:string) => void
+    profilePage: {
+        postsData: Array<ArrayMyPostsType>
+        newPostText: string
+    }
+    addPost: () => void
+    updateNewPostText: (newText: string)=> void
 }
 
 export function MyPosts(props: myPostsType) {
 
     let newPostElement = React.createRef<HTMLInputElement>()
 
-    let post = props.postsData.map(p => <Post message={p.message} likeCount={p.likesCount}/>)
+    let post = props.profilePage.postsData.map(p => <Post message={p.message} likeCount={p.likesCount}/>)
     let onAddPost = () => {
-        let text = newPostElement.current?.value
-        if(text){
-            props.addPost(text);
-        }
+        props.addPost()
+    }
 
+    let onPostChange = () => {
+        let text = newPostElement.current?.value
+        if (text){
+            props.updateNewPostText(text)
+        }
     }
 
     return (
@@ -34,7 +41,11 @@ export function MyPosts(props: myPostsType) {
                 </div>
                 <div>  {/*ниже пойдут посты*/}
                     <div>
-                        <input type="text" ref={newPostElement}/>
+                        <input type="text" ref={newPostElement}
+                               onChange={onPostChange}
+                               value={props.profilePage.newPostText}
+
+                        />
                     </div>
                     <div>
                         <button onClick={ onAddPost}>Add post</button>

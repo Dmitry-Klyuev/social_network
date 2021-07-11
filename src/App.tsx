@@ -30,12 +30,14 @@ export type AppPropsType = {
     state: {
         profilePage: {
             postsData: Array<ArrayPostsDataType>
+            newPostText: string
         }
         dialogsPage: {
             dialogs: Array<ArrayDialogsType>
             messages: Array<ArrayMessagesType>
         }
     }
+    updateNewPostText: (newText: string)=> void
 }
 
 function App(props:AppPropsType) {
@@ -48,7 +50,10 @@ function App(props:AppPropsType) {
                 <div className='content'>
                     <Redirect from='/' to='/profile'/>
 
-                    <Route path='/profile' render={() => <Profile state={props.state.profilePage} addPost={addPost}/>}/>
+                    <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
+                                                                  addPost={addPost}
+                                                                  updateNewPostText={props.updateNewPostText}
+                    />}/>
                     <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
