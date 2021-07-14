@@ -1,6 +1,7 @@
 import React from "react";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {DispatchActionType} from "../../redux/state";
 
 type ArrayMyPostsType ={
     id: number
@@ -13,8 +14,7 @@ type profileType ={
         postsData: Array<ArrayMyPostsType>
         newPostText: string
     }
-    addPost: () => void
-    updateNewPostText: (newText: string)=> void
+    dispatch: (action: DispatchActionType)=> void
 }
 
 export function Profile(props:profileType) {
@@ -23,8 +23,7 @@ export function Profile(props:profileType) {
         <div>
             <ProfileInfo/>
             <MyPosts profilePage={props.profilePage}
-                     addPost={props.addPost}
-                     updateNewPostText={props.updateNewPostText}
+                     dispatch={props.dispatch}
             />
         </div>
     )

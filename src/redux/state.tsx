@@ -1,4 +1,4 @@
-import {DialogsType, MessageType, PostDataType, RootStateType} from "./types";
+import {DispatchAddPostType, DispatchUpdatePostType, RootStateType} from "./types";
 
 export let store : StoreType = {
     _state: {
@@ -31,32 +31,38 @@ export let store : StoreType = {
     renderEntireTree () {
         console.log('stateaaa')
     },
-    addPost () {
-        let newPost = {
-            id: this._state.profilePage.postsData.length,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-        this._state.profilePage.postsData.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this.renderEntireTree()
-    },
-    updateNewPostText  (newText: string) {
-        this._state.profilePage.newPostText = newText
-        this.renderEntireTree()
-    },
     subscribe (observer: () => void) {
         this.renderEntireTree = observer
+    },
+    dispatch (action: DispatchActionType ){
+        if (action.type === 'ADD-POST'){
+            let newPost = {
+                id: this._state.profilePage.postsData.length,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            };
+            this._state.profilePage.postsData.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this.renderEntireTree()
+        }else if (action.type === 'UPDATE-NEW-POST'){
+            this._state.profilePage.newPostText = action.newText
+            this.renderEntireTree()
+        }
+
+
     }
 }
+export type DispatchActionType = DispatchAddPostType | DispatchUpdatePostType
+
 
 export type StoreType = {
     _state: RootStateType
-    getState: ()=> void
+    getState: ()=> RootStateType
     renderEntireTree: ()=>void
-    addPost: ()=>void
-    updateNewPostText: (newText: string)=> void
-    subscribe: (observer: any)=> void
+    // addPost: ()=>void
+    // updateNewPostText: (newText: string)=> void
+    subscribe: (observer: ()=> void)=> void
+    dispatch: (action: DispatchActionType)=> void
 }
 
 

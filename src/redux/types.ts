@@ -23,3 +23,11 @@ export type RootStateType = {
         }
         sidebar: {}
 }
+export type DispatchAddPostType = {
+    type: 'ADD-POST'
+}
+
+export type DispatchUpdatePostType = {
+    type: 'UPDATE-NEW-POST'
+    newText: string
+}

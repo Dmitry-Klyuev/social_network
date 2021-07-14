@@ -1,6 +1,8 @@
 import React from "react";
 import {Post} from "./Post/Post";
 import s from './MyPosts.module.css'
+import {DispatchActionType} from "../../../redux/state";
+
 
 type ArrayMyPostsType = {
     id: number
@@ -12,8 +14,7 @@ type myPostsType = {
         postsData: Array<ArrayMyPostsType>
         newPostText: string
     }
-    addPost: () => void
-    updateNewPostText: (newText: string)=> void
+    dispatch: (action: DispatchActionType)=> void
 }
 
 export function MyPosts(props: myPostsType) {
@@ -22,13 +23,13 @@ export function MyPosts(props: myPostsType) {
 
     let post = props.profilePage.postsData.map(p => <Post message={p.message} likeCount={p.likesCount}/>)
     let onAddPost = () => {
-        props.addPost()
+        props.dispatch({type: "ADD-POST"})
     }
 
     let onPostChange = () => {
         let text = newPostElement.current?.value
         if (text){
-            props.updateNewPostText(text)
+            props.dispatch({type: "UPDATE-NEW-POST", newText: text })
         }
     }
 
@@ -58,3 +59,5 @@ export function MyPosts(props: myPostsType) {
         </div>
     )
 }
+
+
