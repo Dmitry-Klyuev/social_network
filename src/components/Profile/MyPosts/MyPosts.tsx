@@ -39,7 +39,7 @@ export function MyPosts(props: myPostsType) {
                 <div >
                     New post
                 </div>
-                <div>  {/*ниже пойдут посты*/}
+                <div>  {/*post*/}
                     <div>
                         <input type="text" ref={newPostElement}
                                onChange={onPostChange}
@@ -50,7 +50,7 @@ export function MyPosts(props: myPostsType) {
                     <div>
                         <button onClick={ onAddPost}>Add post</button>
                     </div>
-                    {/*Выводим посты с лайками*/}
+                    {/*post and likes*/}
                     {post}
 
                 </div>

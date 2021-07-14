@@ -8,7 +8,6 @@ import {BrowserRouter, Redirect, Route} from "react-router-dom";
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Setting} from "./components/Setting/Setting";
-import {addPost} from "./redux/state";
 
 type ArrayPostsDataType ={
     id: number
@@ -38,6 +37,7 @@ export type AppPropsType = {
         }
     }
     updateNewPostText: (newText: string)=> void
+    addPost: ()=>void
 }
 
 function App(props:AppPropsType) {
@@ -51,7 +51,7 @@ function App(props:AppPropsType) {
                     <Redirect from='/' to='/profile'/>
 
                     <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
-                                                                  addPost={addPost}
+                                                                  addPost={props.addPost}
                                                                   updateNewPostText={props.updateNewPostText}
                     />}/>
                     <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />}/>
