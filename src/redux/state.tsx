@@ -1,4 +1,6 @@
 import {DispatchAddPostType, DispatchUpdatePostType, RootStateType} from "./types";
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 
 export let store : StoreType = {
     _state: {
@@ -48,10 +50,15 @@ export let store : StoreType = {
             this._state.profilePage.newPostText = action.newText
             this.renderEntireTree()
         }
-
-
     }
 }
+
+export const addPostActionCreator = ():DispatchAddPostType => ({type: ADD_POST })
+
+export const updateNewPostActionCreator = (text:string):DispatchUpdatePostType =>
+    ({type: UPDATE_NEW_POST, newText: text})
+
+
 export type DispatchActionType = DispatchAddPostType | DispatchUpdatePostType
 
 
@@ -59,8 +66,6 @@ export type StoreType = {
     _state: RootStateType
     getState: ()=> RootStateType
     renderEntireTree: ()=>void
-    // addPost: ()=>void
-    // updateNewPostText: (newText: string)=> void
     subscribe: (observer: ()=> void)=> void
     dispatch: (action: DispatchActionType)=> void
 }
