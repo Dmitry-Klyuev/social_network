@@ -10,19 +10,19 @@ import {Music} from './components/Music/Music';
 import {Setting} from "./components/Setting/Setting";
 import {DispatchActionType} from "./redux/state";
 
-type ArrayPostsDataType ={
+type ArrayPostsDataType = {
     id: number
     message: string
     likesCount: number
 }
 
-type ArrayDialogsType ={
+type ArrayDialogsType = {
     id: number
     name: string
 }
 
-type ArrayMessagesType ={
-    id:number
+type ArrayMessagesType = {
+    id: number
     message: string
 }
 
@@ -37,10 +37,10 @@ export type AppPropsType = {
             messages: Array<ArrayMessagesType>
         }
     }
-    dispatch: (action: DispatchActionType)=> void
+    dispatch: (action: DispatchActionType) => void
 }
 
-function App(props:AppPropsType) {
+function App(props: AppPropsType) {
 
     return (
         <BrowserRouter>
@@ -53,7 +53,7 @@ function App(props:AppPropsType) {
                     <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
                                                                   dispatch={props.dispatch}
                     />}/>
-                    <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />}/>
+                    <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/setting' render={() => <Setting/>}/>

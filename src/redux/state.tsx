@@ -1,8 +1,9 @@
 import {DispatchAddPostType, DispatchUpdatePostType, RootStateType} from "./types";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 
-export let store : StoreType = {
+export let store: StoreType = {
     _state: {
         profilePage: {
             postsData: [
@@ -27,17 +28,17 @@ export let store : StoreType = {
         },
         sidebar: {}
     },
-    getState () {
+    getState() {
         return this._state
     },
-    renderEntireTree () {
+    renderEntireTree() {
         console.log('stateaaa')
     },
-    subscribe (observer: () => void) {
+    subscribe(observer: () => void) {
         this.renderEntireTree = observer
     },
-    dispatch (action: DispatchActionType ){
-        if (action.type === 'ADD-POST'){
+    dispatch(action: DispatchActionType) {
+        if (action.type === 'ADD-POST') {
             let newPost = {
                 id: this._state.profilePage.postsData.length,
                 message: this._state.profilePage.newPostText,
@@ -46,16 +47,16 @@ export let store : StoreType = {
             this._state.profilePage.postsData.push(newPost)
             this._state.profilePage.newPostText = ''
             this.renderEntireTree()
-        }else if (action.type === 'UPDATE-NEW-POST'){
+        } else if (action.type === 'UPDATE-NEW-POST') {
             this._state.profilePage.newPostText = action.newText
             this.renderEntireTree()
         }
     }
 }
 
-export const addPostActionCreator = ():DispatchAddPostType => ({type: ADD_POST })
+export const addPostActionCreator = (): DispatchAddPostType => ({type: ADD_POST})
 
-export const updateNewPostActionCreator = (text:string):DispatchUpdatePostType =>
+export const updateNewPostActionCreator = (text: string): DispatchUpdatePostType =>
     ({type: UPDATE_NEW_POST, newText: text})
 
 
@@ -64,10 +65,10 @@ export type DispatchActionType = DispatchAddPostType | DispatchUpdatePostType
 
 export type StoreType = {
     _state: RootStateType
-    getState: ()=> RootStateType
-    renderEntireTree: ()=>void
-    subscribe: (observer: ()=> void)=> void
-    dispatch: (action: DispatchActionType)=> void
+    getState: () => RootStateType
+    renderEntireTree: () => void
+    subscribe: (observer: () => void) => void
+    dispatch: (action: DispatchActionType) => void
 }
 
 
