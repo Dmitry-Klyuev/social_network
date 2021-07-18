@@ -4,11 +4,9 @@ import {
     RootStateType,
     SendMessageCreatorType, UpdateNewMessageBodyCreatorType,
 } from "./types";
-
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
-const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
-const SEND_MESSAGE = 'SEND-MESSAGE';
+import {profileReducer} from "./profileReducer";
+import {dialogsReducer} from "./dialogReducer";
+import {sidebarReducer} from "./sidebarReducer";
 
 export let store: StoreType = {
     _state: {
@@ -46,37 +44,20 @@ export let store: StoreType = {
         this.renderEntireTree = observer
     },
     dispatch(action: DispatchActionType) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: this._state.profilePage.postsData.length,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            };
-            this._state.profilePage.postsData.push(newPost)
-            this._state.profilePage.newPostText = '';
-            this.renderEntireTree()
-        } else if (action.type === UPDATE_NEW_POST) {
-            this._state.profilePage.newPostText = action.newText
-            this.renderEntireTree()
-        } else if (action.type === UPDATE_NEW_MESSAGE) {
-            this._state.dialogsPage.newMessageBody = action.body
-            this.renderEntireTree()
-        }else if (action.type === SEND_MESSAGE){
-            let bodyMes = this._state.dialogsPage.newMessageBody
-            this._state.dialogsPage.newMessageBody = ''
-            this._state.dialogsPage.messages.push({id: 6, message: bodyMes})
-            this.renderEntireTree()
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this.renderEntireTree()
     }
 }
 
-export const addPostActionCreator = (): DispatchAddPostType => ({type: ADD_POST})
-
-export const updateNewPostActionCreator = (text: string): DispatchUpdatePostType =>
-    ({type: UPDATE_NEW_POST, newText: text})
-export const sendMessageCreator = ():SendMessageCreatorType => ({type: SEND_MESSAGE})
-export const updateNewMessageBodyCreator = (body:string):UpdateNewMessageBodyCreatorType =>
-    ({type: UPDATE_NEW_MESSAGE, body: body})
+// export const addPostActionCreator = (): DispatchAddPostType => ({type: ADD_POST})
+//
+// export const updateNewPostActionCreator = (text: string): DispatchUpdatePostType =>
+//     ({type: UPDATE_NEW_POST, newText: text})
+// export const sendMessageCreator = ():SendMessageCreatorType => ({type: SEND_MESSAGE})
+// export const updateNewMessageBodyCreator = (body:string):UpdateNewMessageBodyCreatorType =>
+//     ({type: UPDATE_NEW_MESSAGE, body: body})
 
 
 export type DispatchActionType = DispatchAddPostType | DispatchUpdatePostType | SendMessageCreatorType | UpdateNewMessageBodyCreatorType

@@ -1,7 +1,7 @@
 import React from "react";
 import {Post} from "./Post/Post";
 import s from './MyPosts.module.css'
-import {addPostActionCreator, DispatchActionType, updateNewPostActionCreator} from "../../../redux/state";
+import {addPostActionCreator, updateNewPostActionCreator} from "../../../redux/profileReducer";
 
 
 type ArrayMyPostsType = {
@@ -14,7 +14,7 @@ type myPostsType = {
         postsData: Array<ArrayMyPostsType>
         newPostText: string
     }
-    dispatch: (action: DispatchActionType)=> void
+    dispatch: (action: any)=> void
 }
 
 
