@@ -20,6 +20,8 @@ export type RootStateType = {
         dialogsPage: {
             dialogs: Array<DialogsType>
             messages: Array<MessageType>
+            newMessageBody: string
+
         }
         sidebar: {}
 }
@@ -31,3 +33,13 @@ export type DispatchUpdatePostType = {
     type: 'UPDATE-NEW-POST'
     newText: string
 }
+
+export type SendMessageCreatorType = {
+    type: 'SEND-MESSAGE'
+}
+
+export type UpdateNewMessageBodyCreatorType = {
+    type: 'UPDATE-NEW-MESSAGE'
+    body: string
+}
+

@@ -2,6 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css';
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogsItem/DialogsItem";
+import {DispatchActionType, sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/state";
 
 type ArrayDialdsType = {
     id: number
@@ -16,19 +17,23 @@ type dialogsObjType = {
     state: {
         dialogs: Array<ArrayDialdsType>
         messages: Array<ArrayMessageType>
-
+        newMessageBody: string
     }
+    dispatch: (action: DispatchActionType)=> void
 }
 
 export function Dialogs(props: dialogsObjType) {
     debugger
     let dialogsElements = props.state.dialogs.map(d => (<DialogItem name={d.name} id={d.id}/>))
     let messagesElements = props.state.messages.map(m => (<Message message={m.message}/>))
-    let message = React.createRef<HTMLInputElement>()
+    let newMassageBody = props.state.newMessageBody
 
-    let addMessage = () => {
-        let text = message.current?.value
-        alert(text)
+    let onSendMessageClick = () => {
+        props.dispatch(sendMessageCreator())
+    }
+    let onNewMassageChange = (e:any ) => {
+    let body = e.target.value
+        props.dispatch(updateNewMessageBodyCreator(body))
     }
 
     return (
@@ -38,10 +43,14 @@ export function Dialogs(props: dialogsObjType) {
 
             </div>
             <div className={s.messages}>
-                {messagesElements}
+                <div>{messagesElements}</div>
                 <div className={s.textArea}>
-                    <input type="text" ref={message}/>
-                    <button onClick={addMessage}>Add</button>
+                    <input placeholder='Enter you massage'
+                           value={newMassageBody}
+                           type="text"
+                           onChange={onNewMassageChange}
+                           />
+                    <button onClick={onSendMessageClick}>Add</button>
                 </div>
             </div>
 

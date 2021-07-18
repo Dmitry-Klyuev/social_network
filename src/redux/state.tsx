@@ -1,7 +1,14 @@
-import {DispatchAddPostType, DispatchUpdatePostType, RootStateType} from "./types";
+import {
+    DispatchAddPostType,
+    DispatchUpdatePostType,
+    RootStateType,
+    SendMessageCreatorType, UpdateNewMessageBodyCreatorType,
+} from "./types";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
+const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
+const SEND_MESSAGE = 'SEND-MESSAGE';
 
 export let store: StoreType = {
     _state: {
@@ -24,7 +31,8 @@ export let store: StoreType = {
                 {id: 1, message: 'Hello'},
                 {id: 2, message: 'How are you'},
                 {id: 3, message: 'Ok'},
-            ]
+            ],
+            newMessageBody: ''
         },
         sidebar: {}
     },
@@ -38,17 +46,25 @@ export let store: StoreType = {
         this.renderEntireTree = observer
     },
     dispatch(action: DispatchActionType) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: this._state.profilePage.postsData.length,
                 message: this._state.profilePage.newPostText,
                 likesCount: 0
             };
             this._state.profilePage.postsData.push(newPost)
-            this._state.profilePage.newPostText = ''
+            this._state.profilePage.newPostText = '';
             this.renderEntireTree()
-        } else if (action.type === 'UPDATE-NEW-POST') {
+        } else if (action.type === UPDATE_NEW_POST) {
             this._state.profilePage.newPostText = action.newText
+            this.renderEntireTree()
+        } else if (action.type === UPDATE_NEW_MESSAGE) {
+            this._state.dialogsPage.newMessageBody = action.body
+            this.renderEntireTree()
+        }else if (action.type === SEND_MESSAGE){
+            let bodyMes = this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.newMessageBody = ''
+            this._state.dialogsPage.messages.push({id: 6, message: bodyMes})
             this.renderEntireTree()
         }
     }
@@ -58,9 +74,12 @@ export const addPostActionCreator = (): DispatchAddPostType => ({type: ADD_POST}
 
 export const updateNewPostActionCreator = (text: string): DispatchUpdatePostType =>
     ({type: UPDATE_NEW_POST, newText: text})
+export const sendMessageCreator = ():SendMessageCreatorType => ({type: SEND_MESSAGE})
+export const updateNewMessageBodyCreator = (body:string):UpdateNewMessageBodyCreatorType =>
+    ({type: UPDATE_NEW_MESSAGE, body: body})
 
 
-export type DispatchActionType = DispatchAddPostType | DispatchUpdatePostType
+export type DispatchActionType = DispatchAddPostType | DispatchUpdatePostType | SendMessageCreatorType | UpdateNewMessageBodyCreatorType
 
 
 export type StoreType = {
