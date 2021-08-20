@@ -15,7 +15,7 @@ export let store: StoreType = {
                 {id: 1, message: 'Hello guys', likesCount: 15},
                 {id: 2, message: 'My name is Gena', likesCount: 15},
             ],
-            newPostText: ''
+            newPostText: '',
         },
         dialogsPage: {
             dialogs: [
@@ -43,22 +43,13 @@ export let store: StoreType = {
     subscribe(observer: () => void) {
         this.renderEntireTree = observer
     },
-    dispatch(action: DispatchActionType) {
+    dispatch(action:any) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
         this.renderEntireTree()
     }
 }
-
-// export const addPostActionCreator = (): DispatchAddPostType => ({type: ADD_POST})
-//
-// export const updateNewPostActionCreator = (text: string): DispatchUpdatePostType =>
-//     ({type: UPDATE_NEW_POST, newText: text})
-// export const sendMessageCreator = ():SendMessageCreatorType => ({type: SEND_MESSAGE})
-// export const updateNewMessageBodyCreator = (body:string):UpdateNewMessageBodyCreatorType =>
-//     ({type: UPDATE_NEW_MESSAGE, body: body})
-
 
 export type DispatchActionType = DispatchAddPostType | DispatchUpdatePostType | SendMessageCreatorType | UpdateNewMessageBodyCreatorType
 

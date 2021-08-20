@@ -8,9 +8,9 @@ import {BrowserRouter, Redirect, Route} from "react-router-dom";
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Setting} from "./components/Setting/Setting";
-import {DispatchActionType} from "./redux/state";
+import {DispatchActionType} from "./redux/store";
 
-type ArrayPostsDataType ={
+export type ArrayPostsDataType ={
     id: number
     message: string
     likesCount: number
@@ -40,6 +40,7 @@ export type AppPropsType = {
     }
     dispatch: (action: DispatchActionType)=> void
 }
+
 
 function App(props:AppPropsType) {
 

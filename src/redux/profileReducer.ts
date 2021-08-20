@@ -1,11 +1,25 @@
 import {DispatchAddPostType, DispatchUpdatePostType} from "./types";
+import {ArrayPostsDataType} from "../App";
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
+type StateType = {
+    postsData: Array<ArrayPostsDataType>
+    newPostText: string
+}
 
-export const profileReducer = (state: any, action: any) => {
+type ProfileActionType = DispatchAddPostType | DispatchUpdatePostType
+
+
+let initialState = {
+    postsData: [
+        {id: 1, message: 'Hello guys', likesCount: 15},
+        {id: 2, message: 'My name is Gena', likesCount: 15},
+    ],
+    newPostText: ''
+}
+
+export const profileReducer = (state: StateType  = initialState, action: ProfileActionType) => {
     switch (action.type) {
-        case ADD_POST:
+        case 'ADD-POST':
             let newPost = {
                 id: 6,
                 message: state.newPostText,
@@ -14,7 +28,7 @@ export const profileReducer = (state: any, action: any) => {
             state.postsData.push(newPost)
             state.newPostText = '';
             return state
-        case UPDATE_NEW_POST:
+        case 'UPDATE-NEW-POST':
             state.newPostText = action.newText
             return state
         default:
@@ -22,7 +36,7 @@ export const profileReducer = (state: any, action: any) => {
     }
 }
 
-export const addPostActionCreator = (): DispatchAddPostType => ({type: ADD_POST})
+export const addPostActionCreator = (): DispatchAddPostType => ({type: 'ADD-POST'})
 
 export const updateNewPostActionCreator = (text: string): DispatchUpdatePostType =>
-    ({type: UPDATE_NEW_POST, newText: text})
+    ({type: 'UPDATE-NEW-POST', newText: text})

@@ -1,7 +1,7 @@
 import React from "react";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {DispatchActionType} from "../../redux/state";
+import {DispatchActionType} from "../../redux/store";
 
 type ArrayMyPostsType ={
     id: number
