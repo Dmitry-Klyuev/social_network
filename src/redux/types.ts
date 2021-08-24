@@ -21,10 +21,19 @@ export type RootStateType = {
             dialogs: Array<DialogsType>
             messages: Array<MessageType>
             newMessageBody: string
-
         }
         sidebar: {}
 }
+
+export type StoreType = {
+    _state: RootStateType
+    getState: () => RootStateType
+    renderEntireTree: () => void
+    subscribe: (observer: () => void) => void
+    dispatch: (action: ActionsType) => void
+}
+
+type ActionsType = DispatchAddPostType | DispatchUpdatePostType | SendMessageCreatorType | UpdateNewMessageBodyCreatorType
 export type DispatchAddPostType = {
     type: 'ADD-POST'
 }

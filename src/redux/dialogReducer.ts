@@ -35,6 +35,7 @@ export const dialogsReducer = (state = initialState, action: DialogActionType) =
     }
 }
 
-export const sendMessageCreator = ():SendMessageCreatorType => ({type: 'SEND-MESSAGE'})
+export const sendMessageCreator = ():SendMessageCreatorType =>
+    ({type: 'SEND-MESSAGE'})
 export const updateNewMessageBodyCreator = (body:string):UpdateNewMessageBodyCreatorType =>
-    ({type: 'UPDATE-NEW-MESSAGE', body: body})
+    ({type: 'UPDATE-NEW-MESSAGE', body})

@@ -4,6 +4,7 @@ import s from './Navbar.module.css';
 
 export function Navbar(){
     return(
+
         <nav className={s.nav}>
             <div className={s.item}>
                 <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>

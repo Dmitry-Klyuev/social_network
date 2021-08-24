@@ -1,8 +1,7 @@
-import {DispatchAddPostType, DispatchUpdatePostType} from "./types";
-import {ArrayPostsDataType} from "../App";
+import {DispatchAddPostType, DispatchUpdatePostType, PostDataType} from "./types";
 
 type StateType = {
-    postsData: Array<ArrayPostsDataType>
+    postsData: Array<PostDataType>
     newPostText: string
 }
 
@@ -38,5 +37,5 @@ export const profileReducer = (state: StateType  = initialState, action: Profile
 
 export const addPostActionCreator = (): DispatchAddPostType => ({type: 'ADD-POST'})
 
-export const updateNewPostActionCreator = (text: string): DispatchUpdatePostType =>
-    ({type: 'UPDATE-NEW-POST', newText: text})
+export const updateNewPostActionCreator = (newText: string): DispatchUpdatePostType =>
+    ({type: 'UPDATE-NEW-POST', newText})

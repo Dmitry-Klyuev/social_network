@@ -1,61 +1,52 @@
 import React from "react";
 import s from './Dialogs.module.css';
-import {Message} from "./Message/Message";
+import {Button,  TextField} from "@material-ui/core";
 import {DialogItem} from "./DialogsItem/DialogsItem";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogReducer";
+import {Message} from "./Message/Message";
+import {DialogsType, MessageType} from "../../redux/types";
 
-type ArrayDialdsType = {
-    id: number
-    name: string
-}
-type ArrayMessageType = {
-    id: number
-    message: string
-}
-
-type dialogsObjType = {
-    state: {
-        dialogs: Array<ArrayDialdsType>
-        messages: Array<ArrayMessageType>
+type DialogsProps = {
+    onNewMassageChange: (body: string) => void
+    onSendMessageClick: () => void
+    dialogsPage: {
+        dialogs: Array<DialogsType>
+        messages: Array<MessageType>
         newMessageBody: string
     }
-    dispatch: (action: any)=> void
 }
 
-export function Dialogs(props: dialogsObjType) {
+export function Dialogs(props: DialogsProps) {
 
-    let dialogsElements = props.state.dialogs.map(d => (<DialogItem name={d.name} id={d.id}/>))
-    let messagesElements = props.state.messages.map(m => (<Message message={m.message}/>))
-    let newMassageBody = props.state.newMessageBody
+    let dialogsElements = props.dialogsPage.dialogs.map( d => <DialogItem name={d.name} id={d.id} />)
+    let messagesElement = props.dialogsPage.messages.map( m => <Message message={m.message} />)
+    let newMessageBody = props.dialogsPage.newMessageBody
 
     let onSendMessageClick = () => {
-        props.dispatch(sendMessageCreator())
+        props.onSendMessageClick()
     }
-    let onNewMassageChange = (e:any ) => {
-    let body = e.target.value
-        props.dispatch(updateNewMessageBodyCreator(body))
+    let onNewMassageChange = (e: any) => {
+        let body = e.target.value
+        props.onNewMassageChange(body)
     }
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
                 {dialogsElements}
-
             </div>
             <div className={s.messages}>
-                <div>{messagesElements}</div>
+                <div>{messagesElement}</div>
                 <div className={s.textArea}>
-                    <input placeholder='Enter you massage'
-                           value={newMassageBody}
-                           type="text"
-                           onChange={onNewMassageChange}
-                           />
-                    <button onClick={onSendMessageClick}>Add</button>
+                    <TextField
+                        size="small"
+                        variant="filled"
+                        placeholder='Enter you massage'
+                        value={newMessageBody}
+                        type="text"
+                        onChange={onNewMassageChange}
+                    />
+                    <Button variant="contained" color="primary" style={ {margin: '10px'} }  onClick={onSendMessageClick}>Add</Button>
                 </div>
             </div>
-
-
-
         </div>
     )
 }

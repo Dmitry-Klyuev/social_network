@@ -8,62 +8,46 @@ import {BrowserRouter, Redirect, Route} from "react-router-dom";
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Setting} from "./components/Setting/Setting";
-import {DispatchActionType} from "./redux/store";
-
-export type ArrayPostsDataType ={
-    id: number
-    message: string
-    likesCount: number
-}
-
-type ArrayDialogsType ={
-    id: number
-    name: string
-}
-
-type ArrayMessagesType ={
-    id:number
-    message: string
-}
+import {Container, Grid, Paper} from '@material-ui/core';
+import {StoreType} from "./redux/types";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 export type AppPropsType = {
-    state: {
-        profilePage: {
-            postsData: Array<ArrayPostsDataType>
-            newPostText: string
-        }
-        dialogsPage: {
-            dialogs: Array<ArrayDialogsType>
-            messages: Array<ArrayMessagesType>
-            newMessageBody: string
-        }
-    }
-    dispatch: (action: DispatchActionType)=> void
+    store: any
 }
 
-
-function App(props:AppPropsType) {
-
+const App: React.FC<AppPropsType> = (props) => {
     return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='content'>
-                    <Redirect from='/' to='/profile'/>
+        <div className={'background'}>
+            <BrowserRouter>
+                <Container maxWidth="md">
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Header/>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Paper elevation={3}>
+                                <Navbar/>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={9}>
+                            <Paper elevation={3}>
+                                <Redirect from='/' to='/profile'/>
 
-                    <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
-                                                                  dispatch={props.dispatch}
-                    />}/>
-                    <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}
-                                                                  dispatch={props.dispatch}/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/setting' render={() => <Setting/>}/>
-                </div>
-            </div>
-        </BrowserRouter>
+                                <Route path='/profile' render={() => <Profile
+                                    store={props.store}
+                                />}/>
+                                <Route path='/dialogs' render={() => <DialogsContainer store={props.store}
+                                                                              />}/>
+                                <Route path='/news' render={() => <News/>}/>
+                                <Route path='/music' render={() => <Music/>}/>
+                                <Route path='/setting' render={() => <Setting/>}/>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </Container>
+            </BrowserRouter>
+        </div>
     )
 }
-
 export default App;
