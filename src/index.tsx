@@ -2,13 +2,13 @@ import ReactDOM from "react-dom";
 import store from "./redux/redux-store";
 import React from "react";
 import App from "./App";
+import {Provider} from "react-redux";
 
 let renderEntireTree = () => {
     ReactDOM.render(
-        <React.StrictMode>
-            <App store={store}
-            />
-        </React.StrictMode>,
+        <Provider store={store}>
+          <App/>
+        </Provider>,
         document.getElementById('root')
     );
 }

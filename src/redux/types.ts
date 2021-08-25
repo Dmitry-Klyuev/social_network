@@ -33,7 +33,7 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-type ActionsType = DispatchAddPostType | DispatchUpdatePostType | SendMessageCreatorType | UpdateNewMessageBodyCreatorType
+export type ActionsType = DispatchAddPostType | DispatchUpdatePostType | SendMessageCreatorType | UpdateNewMessageBodyCreatorType
 export type DispatchAddPostType = {
     type: 'ADD-POST'
 }

@@ -2,14 +2,14 @@ import React from "react";
 import {Post} from "./Post/Post";
 import s from './MyPosts.module.css'
 import {Button, TextField} from "@material-ui/core";
-import {ArrayMyPostsType} from "./MyPostsContainer";
+import {PostDataType} from "../../../redux/types";
 
 
 
 type myPostsType = {
     updateNewPost: (text: string) => void
     AddPost: ()=> void
-    post: Array<ArrayMyPostsType>
+    post: Array<PostDataType>
     newPostText: string
 }
 

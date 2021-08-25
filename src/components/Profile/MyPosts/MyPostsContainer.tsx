@@ -1,37 +1,25 @@
 import React from "react";
-import {Post} from "./Post/Post";
 import {addPostActionCreator, updateNewPostActionCreator} from "../../../redux/profileReducer";
-import {Button, Input, TextField} from "@material-ui/core";
 import {MyPosts} from "./MyPosts";
-import {StoreType} from "../../../redux/types";
+import {ActionsType, RootStateType} from "../../../redux/types";
+import {connect} from "react-redux";
 
-
-export type ArrayMyPostsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-type myPostsType = {
-    store: StoreType
-}
-
-
-export function MyPostsContainer(props: myPostsType) {
-    let state = props.store.getState()
-    let onAddPost = () => {
-        props.store.dispatch(addPostActionCreator())
+let mapStateToProps = (state:RootStateType) => {
+    return {
+        newPostText: state.profilePage.newPostText,
+        post: state.profilePage.postsData,
     }
-
-    let onPostChange = (text: string) => {
-        let action = updateNewPostActionCreator(text);
-        props.store.dispatch(action)
+}
+let mapDispatchToProps = (dispatch:(action: ActionsType) => void) => {
+    return {
+        updateNewPost: (text: string)=> {
+            let action = updateNewPostActionCreator(text);
+            dispatch(action)
+        },
+        AddPost: () => {
+            dispatch(addPostActionCreator())
+        }
     }
-
-    return (<MyPosts updateNewPost={onPostChange}
-                     AddPost={onAddPost}
-                     newPostText={state.profilePage.newPostText}
-                     post={state.profilePage.postsData}
-    />)
 }
 
-
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)

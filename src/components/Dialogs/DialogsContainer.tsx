@@ -1,30 +1,23 @@
 import React from "react";
-import s from './Dialogs.module.css';
-import {Message} from "./Message/Message";
-import {DialogItem} from "./DialogsItem/DialogsItem";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogReducer";
-import {Button, Input, TextField} from "@material-ui/core";
-import {StoreType} from "../../redux/types";
+import {ActionsType, RootStateType} from "../../redux/types";
 import {Dialogs} from "./Dialogs";
+import {connect} from "react-redux";
 
-type dialogsObjType = {
-    store: StoreType
+let mapStateToProps = (state: RootStateType) => {
+    return {
+        dialogsPage: state.dialogsPage,
+    }
+}
+let mapDispatchToProps = (dispatch:(action: ActionsType) => void) => {
+    return {
+        onNewMassageChange: (body:string) => {
+            dispatch(updateNewMessageBodyCreator(body))
+        },
+        onSendMessageClick: () => {
+            dispatch(sendMessageCreator())
+        },
+    }
 }
 
-export function DialogsContainer(props: dialogsObjType) {
-    let state = props.store.getState().dialogsPage
-
-    let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator())
-    }
-
-    let onNewMassageChange = (body: string) => {
-        props.store.dispatch(updateNewMessageBodyCreator(body))
-    }
-
-    return <Dialogs
-            onNewMassageChange={onNewMassageChange}
-            onSendMessageClick={onSendMessageClick}
-            dialogsPage={state}
-        />
-}
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
