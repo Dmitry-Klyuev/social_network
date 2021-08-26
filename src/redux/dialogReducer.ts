@@ -22,14 +22,18 @@ type DialogActionType = SendMessageCreatorType | UpdateNewMessageBodyCreatorType
 
 export const dialogsReducer = (state = initialState, action: DialogActionType) => {
     switch (action.type) {
-        case 'UPDATE-NEW-MESSAGE':
-            state.newMessageBody = action.body
-            return state
-        case 'SEND-MESSAGE':
-            let bodyMes = state.newMessageBody
-            state.newMessageBody = ''
-            state.messages.push({id: 6, message: bodyMes})
-            return state
+        case 'UPDATE-NEW-MESSAGE': {
+         let copeState = {...state}
+            copeState.newMessageBody = action.body
+            return copeState
+        }
+        case 'SEND-MESSAGE':{
+            let copyState = {...state}
+            let bodyMes = copyState.newMessageBody
+            copyState.newMessageBody = ''
+            copyState.messages.push({id: 6, message: bodyMes})
+            return copyState
+        }
         default:
             return state
     }
