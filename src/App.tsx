@@ -9,6 +9,7 @@ import {Music} from './components/Music/Music';
 import {Setting} from "./components/Setting/Setting";
 import {Container, Grid, Paper} from '@material-ui/core';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 // export type AppPropsType = {
 //     store: any
@@ -34,6 +35,7 @@ const App: React.FC = () => {
 
                                 <Route path='/profile' render={() => <Profile/>}/>
                                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                                <Route path='/users' render={ ()=> <UsersContainer/> } />
                                 <Route path='/news' render={() => <News/>}/>
                                 <Route path='/music' render={() => <Music/>}/>
                                 <Route path='/setting' render={() => <Setting/>}/>

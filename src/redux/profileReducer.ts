@@ -5,7 +5,7 @@ type StateType = {
     newPostText: string
 }
 
-type ProfileActionType = DispatchAddPostType | DispatchUpdatePostType
+export type ProfileActionType = DispatchAddPostType | DispatchUpdatePostType
 
 
 let initialState = {
@@ -19,21 +19,14 @@ let initialState = {
 export const profileReducer = (state: StateType  = initialState, action: ProfileActionType) => {
     switch (action.type) {
         case 'ADD-POST': {
-            let copyState = {...state}
-            let newPost = {
-                id: 6,
-                message: state.newPostText,
-                likesCount: 0
-            };
-            copyState.postsData = [...state.postsData]
-            copyState.postsData.push(newPost)
-            copyState.newPostText = '';
-            return copyState
+            return {
+                ...state,
+                postsData: [...state.postsData, {id: 6, message: state.newPostText, likesCount: 0}],
+                newPostText: ''
+            }
         }
         case 'UPDATE-NEW-POST': {
-            let copyState = {...state}
-            copyState.newPostText = action.newText
-            return copyState
+            return {...state, newPostText: action.newText}
         }
         default:
             return state

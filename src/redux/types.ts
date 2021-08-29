@@ -13,16 +13,17 @@ export type MessageType = {
 }
 
 export type RootStateType = {
-        profilePage: {
-            postsData: Array<PostDataType>
-            newPostText: string
-        }
-        dialogsPage: {
-            dialogs: Array<DialogsType>
-            messages: Array<MessageType>
-            newMessageBody: string
-        }
-        sidebar: {}
+    profilePage: {
+        postsData: Array<PostDataType>
+        newPostText: string
+    }
+    dialogsPage: {
+        dialogs: Array<DialogsType>
+        messages: Array<MessageType>
+        newMessageBody: string
+    }
+    sidebar: {}
+    usersPage: {}
 }
 
 export type StoreType = {
@@ -33,7 +34,11 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export type ActionsType = DispatchAddPostType | DispatchUpdatePostType | SendMessageCreatorType | UpdateNewMessageBodyCreatorType
+export type ActionsType =
+    DispatchAddPostType
+    | DispatchUpdatePostType
+    | SendMessageCreatorType
+    | UpdateNewMessageBodyCreatorType
 export type DispatchAddPostType = {
     type: 'ADD-POST'
 }

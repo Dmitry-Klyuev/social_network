@@ -32,7 +32,8 @@ export let store: StoreType = {
             ],
             newMessageBody: ''
         },
-        sidebar: {}
+        sidebar: {},
+        usersPage: {},
     },
     getState() {
         return this._state
