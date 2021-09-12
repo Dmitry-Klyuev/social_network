@@ -1,5 +1,4 @@
 
-
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -20,13 +19,12 @@ type setUsersACType = {
 }
 
 export type UsersType = {
+    name: string
     id: number
-    fullName: string
-    avatar: string
-    followed: boolean
+    uniqueUrlName?: string
+    photos: {small?: string, large?: string}
     status: string
-    city: string
-    country: string
+    followed: boolean
 }
 
 export type UsersStateType = {
@@ -36,12 +34,12 @@ export type UsersStateType = {
 export type usersActionType = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
 
 let initialState : UsersStateType= {
-    users: [
-        {id: 1, fullName: 'Dmirty', avatar: 'https://proslang.ru/wp-content/uploads/2019/03/avatarka_1-300x300.jpg', followed: true, status: 'i am a boss', city: 'Minsk', country: 'Belarus'},
-        {id: 2, fullName: 'Oleg', avatar: 'https://proslang.ru/wp-content/uploads/2019/03/avatarka_1-300x300.jpg', followed: false, status: 'i am a boss too', city: 'Moscow', country: 'Russia'},
-        {id: 3, fullName: 'Andrey', avatar: 'https://proslang.ru/wp-content/uploads/2019/03/avatarka_1-300x300.jpg', followed: true, status: 'i am a boss too', city: 'Kiev', country: 'Ukraine'},
-
-    ]
+    users: []
+    //     {id: 1, fullName: 'Dmirty', avatar: 'https://proslang.ru/wp-content/uploads/2019/03/avatarka_1-300x300.jpg', followed: true, status: 'i am a boss', city: 'Minsk', country: 'Belarus'},
+    //     {id: 2, fullName: 'Oleg', avatar: 'https://proslang.ru/wp-content/uploads/2019/03/avatarka_1-300x300.jpg', followed: false, status: 'i am a boss too', city: 'Moscow', country: 'Russia'},
+    //     {id: 3, fullName: 'Andrey', avatar: 'https://proslang.ru/wp-content/uploads/2019/03/avatarka_1-300x300.jpg', followed: true, status: 'i am a boss too', city: 'Kiev', country: 'Ukraine'},
+    //
+    // ]
 }
 export const usersReducer = (state: UsersStateType = initialState, action:usersActionType) : UsersStateType=> {
     switch (action.type) {
