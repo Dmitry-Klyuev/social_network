@@ -7,7 +7,7 @@ import axios from "axios";
 import userUnknownPhoto from '../../img/ava.jpg'
 
 
-type UsersPropsType = {
+export type UsersPropsType = {
     users: Array<UsersType>
     follow: (userId: number) => void
     unfollow: (userId: number) => void
@@ -16,42 +16,13 @@ type UsersPropsType = {
 
 export const Users = (props: UsersPropsType) => {
 
+
     if (props.users.length === 0) {
 
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
             debugger;
             props.setUsers(response.data.items)
         })
-        // props.setUsers([
-        //     {
-        //         id: 1,
-        //         avatar: 'https://proslang.ru/wp-content/uploads/2019/03/avatarka_1-300x300.jpg',
-        //         fullName: 'Dima',
-        //         status: 'i am the boss',
-        //         followed: true,
-        //         country: 'Belarus',
-        //         city: 'Minsk'
-        //     },
-        //     {
-        //         id: 2,
-        //         avatar: 'https://proslang.ru/wp-content/uploads/2019/03/avatarka_1-300x300.jpg',
-        //         fullName: 'Oleg',
-        //         status: 'Yo, i am the boss too',
-        //         followed: false,
-        //         country: 'Russia',
-        //         city: 'Moscow'
-        //     },
-        //     {
-        //         id: 3,
-        //         avatar: 'https://proslang.ru/wp-content/uploads/2019/03/avatarka_1-300x300.jpg',
-        //         fullName: 'Nikita',
-        //         status: 'I am haiter',
-        //         followed: false,
-        //         country: 'Ukraine',
-        //         city: 'Kiev'
-        //     }
-        //
-        // ])
     }
 
     return (
