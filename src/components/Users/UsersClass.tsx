@@ -1,26 +1,26 @@
 import React from 'react';
-import {UsersPropsType} from "./Users";
 import {Container, Grid, Paper, Typography} from "@material-ui/core";
 import s from "./Users.module.css";
 import userUnknownPhoto from "../../img/ava.jpg";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import {UsersType} from "./UsersContainer";
 
-export class Users extends React.Component<UsersPropsType> {
+class UsersClass extends React.Component<UsersType> {
 
-    constructor(props:any) {
+    constructor(props: UsersType) {
         super(props);
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            this.props.setUsers(response.data.items)
-        })
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
     }
 
     render() {
-        return (
+        return <>
             <Container fixed>
                 {
-                    this.props.users.map(u => <div key={u.id}>
-
+                    this.props.usersPage.users.map(u => <div key={u.id}>
                         <Paper elevation={3} style={{width: '95%', marginLeft: '15px'}}>
                             <Grid container spacing={3}>
                                 <Grid item xs={3}>
@@ -42,9 +42,7 @@ export class Users extends React.Component<UsersPropsType> {
                                                       }}>Follow</Button>}
                                     </div>
                                 </Grid>
-
                                 <Grid item xs={2}>
-
                                     <div>{u.name}</div>
                                 </Grid>
                                 <Grid item xs={5}>
@@ -52,19 +50,18 @@ export class Users extends React.Component<UsersPropsType> {
                                         <div>{u.status != null ? u.status : 'status not set'}</div>
                                     </Typography>
                                 </Grid>
-
                                 <Grid item xs={2}>
                                     <div>{'u.country'}</div>
                                     <div>{'u.city'}</div>
                                 </Grid>
-
                             </Grid>
                         </Paper>
-
                     </div>)
                 }
             </Container>
-        )
+        </>
     }
 }
+
+export default UsersClass
 

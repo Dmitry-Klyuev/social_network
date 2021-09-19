@@ -8,13 +8,16 @@ export type AppDispatchType = Dispatch<AppActionsTypes>;
 export type AppActionsTypes = ProfileActionType | DialogActionType | usersActionType;
 
 
-let reducers = combineReducers({
+export const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer
 })
-let store = createStore(reducers)
+export type AppStateType = ReturnType<typeof rootReducer>
+
+export let store = createStore(rootReducer)
+
 
 // @ts-ignore
 window.store = store

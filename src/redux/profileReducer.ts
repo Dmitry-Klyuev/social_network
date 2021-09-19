@@ -1,22 +1,18 @@
 import {DispatchAddPostType, DispatchUpdatePostType, PostDataType} from "./types";
 
-type StateType = {
-    postsData: Array<PostDataType>
-    newPostText: string
-}
-
 export type ProfileActionType = DispatchAddPostType | DispatchUpdatePostType
 
+type ProfileInitialState = typeof initialState
 
 let initialState = {
     postsData: [
         {id: 1, message: 'Hello guys', likesCount: 15},
         {id: 2, message: 'My name is Gena', likesCount: 15},
-    ],
+    ] as Array<PostDataType>,
     newPostText: ''
 }
 
-export const profileReducer = (state: StateType  = initialState, action: ProfileActionType) => {
+export const profileReducer = (state: ProfileInitialState  = initialState, action: ProfileActionType): ProfileInitialState => {
     switch (action.type) {
         case 'ADD-POST': {
             return {

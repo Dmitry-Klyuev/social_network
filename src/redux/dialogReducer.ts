@@ -1,7 +1,10 @@
 import {
+    DialogsType, MessageType,
     SendMessageCreatorType,
     UpdateNewMessageBodyCreatorType
 } from "./types";
+
+type dialogInitialState = typeof initialState
 
 let initialState = {
     dialogs: [
@@ -10,17 +13,18 @@ let initialState = {
         {id: 3, name: 'Jenya'},
         {id: 4, name: 'Misha'},
         {id: 5, name: 'Andrey'},
-    ],
+    ] as Array<DialogsType>,
     messages: [
         {id: 1, message: 'Hello'},
         {id: 2, message: 'How are you'},
         {id: 3, message: 'Ok'},
-    ],
+    ] as Array<MessageType>,
     newMessageBody: ''
 }
+
 export type DialogActionType = SendMessageCreatorType | UpdateNewMessageBodyCreatorType
 
-export const dialogsReducer = (state = initialState, action: DialogActionType) => {
+export const dialogsReducer = (state: dialogInitialState = initialState, action: DialogActionType): dialogInitialState=> {
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE': {
             return {...state, newMessageBody: action.body}

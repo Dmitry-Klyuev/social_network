@@ -1,23 +1,17 @@
 import React from 'react';
 import s from './Users.module.css'
-import {UsersType} from "../../redux/usersReducer";
 import Button from '@material-ui/core/Button';
 import {Container, Grid, Paper, Typography} from "@material-ui/core";
 import axios from "axios";
 import userUnknownPhoto from '../../img/ava.jpg'
+import {UsersType} from "./UsersContainer";
 
 
-export type UsersPropsType = {
-    users: Array<UsersType>
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    setUsers: (users: Array<UsersType>) => void
-}
 
-export const Users = (props: UsersPropsType) => {
+export const Users = (props: UsersType) => {
 
 
-    if (props.users.length === 0) {
+    if (props.usersPage.users.length === 0) {
 
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
             debugger;
@@ -28,7 +22,7 @@ export const Users = (props: UsersPropsType) => {
     return (
         <Container fixed>
             {
-                props.users.map(u => <div key={u.id}>
+                props.usersPage.users.map(u => <div key={u.id}>
 
                     <Paper elevation={3} style={{width: '95%', marginLeft: '15px'}}>
                         <Grid container spacing={3}>
