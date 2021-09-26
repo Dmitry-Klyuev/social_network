@@ -2,4 +2,16 @@
     width: 100px;
     height: 100px;
 }
+.pagination{
+    text-align: center;
+}
+
+.pagination:hover{
+    cursor: pointer;
+}
+
+
+.activeNumber{
+    font-weight: bold;
+}
 
