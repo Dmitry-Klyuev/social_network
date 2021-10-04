@@ -11,10 +11,6 @@ import {Container, Grid, Paper} from '@material-ui/core';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 
-// export type AppPropsType = {
-//     store: any
-// }
-
 const App: React.FC = () => {
     return (
         <div className={'background'}>

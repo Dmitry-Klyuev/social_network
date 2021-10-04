@@ -3,6 +3,7 @@ const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
+const IS_FETCHING = 'IS_FETCHING'
 
 type followACType = {
     type: 'FOLLOW'
@@ -28,6 +29,11 @@ type setTotalUsersCountACType = {
     usersCount: number
 }
 
+type setIsFetchingACType = {
+    type: 'IS_FETCHING'
+    isFetching: boolean
+}
+
 export type UserType = {
     name: string
     id: number
@@ -42,6 +48,7 @@ export type UsersStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 export type usersActionType = ReturnType<typeof followAC>
@@ -49,14 +56,14 @@ export type usersActionType = ReturnType<typeof followAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof setIsFetchingAC>
 
 let initialState: UsersStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-
-
+    isFetching: false
 }
 export const usersReducer = (state: UsersStateType = initialState, action: usersActionType): UsersStateType => {
     switch (action.type) {
@@ -88,8 +95,11 @@ export const usersReducer = (state: UsersStateType = initialState, action: users
         case CURRENT_PAGE: {
             return {...state, currentPage: action.currentPage}
         }
-        case SET_TOTAL_COUNT:{
+        case SET_TOTAL_COUNT: {
             return {...state, totalUsersCount: action.usersCount}
+        }
+        case IS_FETCHING: {
+            return {...state, isFetching: action.isFetching}
         }
 
         default:
@@ -101,6 +111,8 @@ export const followAC = (userId: number): followACType => ({type: FOLLOW, userId
 export const unFollowAC = (userId: number): unfollowACType => ({type: UNFOLLOW, userId});
 export const setUsersAC = (users: Array<UserType>): setUsersACType => ({type: SET_USERS, users})
 export const setCurrentPageAC = (currentPage: number): setCurrentPageACType => ({type: CURRENT_PAGE, currentPage})
-export const setTotalUsersCountAC = (usersCount: number):setTotalUsersCountACType => ({type: SET_TOTAL_COUNT, usersCount})
+export const setTotalUsersCountAC = (usersCount: number): setTotalUsersCountACType => ({type: SET_TOTAL_COUNT, usersCount})
+export const setIsFetchingAC = (isFetching: boolean): setIsFetchingACType => ({type: IS_FETCHING, isFetching})
+
 
 export default usersReducer;
