@@ -22,7 +22,7 @@ export let store: StoreType = {
             dialogs: [
                 {id: 1, name: 'Dima'},
                 {id: 2, name: 'Oleg'},
-                {id: 3, name: 'Jenya'},
+                {id: 3, name: 'Misha'},
                 {id: 4, name: 'Misha'},
                 {id: 5, name: 'Andrey'},
             ],
@@ -40,7 +40,7 @@ export let store: StoreType = {
         return this._state
     },
     renderEntireTree() {
-        console.log('stateaaa')
+        console.log('yas')
     },
     subscribe(observer: () => void) {
         this.renderEntireTree = observer

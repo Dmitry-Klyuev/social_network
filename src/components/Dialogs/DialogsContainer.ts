@@ -1,4 +1,3 @@
-import React from "react";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogReducer";
 import {ActionsType, RootStateType} from "../../redux/types";
 import {Dialogs} from "./Dialogs";

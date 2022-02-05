@@ -1,4 +1,3 @@
-import {Grid, Paper} from '@material-ui/core';
 import React from 'react';
 import s from './Header.module.css';
 
