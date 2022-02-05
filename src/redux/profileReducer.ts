@@ -6,7 +6,38 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 export type ProfileActionType = DispatchAddPostType | DispatchUpdatePostType | SetUserProfileActionType
 
-type ProfileInitialState = typeof initialState
+type ProfileInitialState = {
+    postsData: Array<PostsType>
+    newPostText: string,
+    profile: ProfileType | null
+}
+
+export type ProfileType = {
+    aboutMe: string
+    contacts: {
+        facebook: string | null
+        website: string | null
+        vk: string | null
+        twitter: string | null
+        instagram: string | null
+        youtube: string | null
+        github: string | null
+        mainLink: string | null
+    },
+    lookingForAJob: boolean
+    lookingForAJobDescription: string | null
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string
+        large: string
+    }
+}
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
 
 let initialState = {
     postsData: [
@@ -37,10 +68,7 @@ export const profileReducer = (state: ProfileInitialState  = initialState, actio
     }
 }
 
-export const addPostActionCreator = (): DispatchAddPostType => ({type: 'ADD-POST'})
-
-export const updateNewPostActionCreator = (newText: string): DispatchUpdatePostType =>
-    ({type: 'UPDATE-NEW-POST', newText})
-
-export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile})
+export const addPostActionCreator = () => ({type: 'ADD-POST'} as const)
+export const updateNewPostActionCreator = (newText: string) => ({type: 'UPDATE-NEW-POST', newText} as const)
+export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 

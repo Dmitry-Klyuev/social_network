@@ -1,3 +1,6 @@
+import {addPostActionCreator, ProfileType, setUserProfile, updateNewPostActionCreator} from "./profileReducer";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogReducer";
+
 export type PostDataType = {
     id: number
     message: string
@@ -40,25 +43,11 @@ export type ActionsType =
     | DispatchUpdatePostType
     | SendMessageCreatorType
     | UpdateNewMessageBodyCreatorType
-export type DispatchAddPostType = {
-    type: 'ADD-POST'
-}
+    | SetUserProfileActionType
 
-export type DispatchUpdatePostType = {
-    type: 'UPDATE-NEW-POST'
-    newText: string
-}
-
-export type SendMessageCreatorType = {
-    type: 'SEND-MESSAGE'
-}
-
-export type UpdateNewMessageBodyCreatorType = {
-    type: 'UPDATE-NEW-MESSAGE'
-    body: string
-}
-export type SetUserProfileActionType = {
-    type: 'SET_USER_PROFILE'
-    profile: any
-}
+export type DispatchAddPostType = ReturnType<typeof addPostActionCreator>
+export type DispatchUpdatePostType = ReturnType<typeof updateNewPostActionCreator>
+export type SendMessageCreatorType = ReturnType<typeof sendMessageCreator>
+export type UpdateNewMessageBodyCreatorType = ReturnType<typeof updateNewMessageBodyCreator>
+export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 

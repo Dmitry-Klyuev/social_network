@@ -9,7 +9,7 @@ import {Setting} from "./components/Setting/Setting";
 import {Container, Grid, Paper} from '@material-ui/core';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 const App: React.FC = () => {
     return (

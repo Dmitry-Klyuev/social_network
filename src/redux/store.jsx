@@ -1,14 +1,8 @@
-import {
-    DispatchAddPostType,
-    DispatchUpdatePostType,
-    RootStateType,
-    SendMessageCreatorType, SetUserProfileActionType, UpdateNewMessageBodyCreatorType,
-} from "./types";
 import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogReducer";
 import {sidebarReducer} from "./sidebarReducer";
 
-export let store: StoreType = {
+export let store = {
     _state: {
         profilePage: {
             postsData: [
@@ -42,10 +36,10 @@ export let store: StoreType = {
     renderEntireTree() {
         console.log('yas')
     },
-    subscribe(observer: () => void) {
+    subscribe(observer) {
         this.renderEntireTree = observer
     },
-    dispatch(action:any) {
+    dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
@@ -53,16 +47,16 @@ export let store: StoreType = {
     }
 }
 
-export type DispatchActionType = DispatchAddPostType | DispatchUpdatePostType | SendMessageCreatorType | UpdateNewMessageBodyCreatorType | SetUserProfileActionType
+// export type DispatchActionType = DispatchAddPostType | DispatchUpdatePostType | SendMessageCreatorType | UpdateNewMessageBodyCreatorType | SetUserProfileActionType
 
 
-export type StoreType = {
-    _state: RootStateType
-    getState: () => RootStateType
-    renderEntireTree: () => void
-    subscribe: (observer: () => void) => void
-    dispatch: (action: DispatchActionType) => void
-}
+// export type StoreType =  {
+//     _state: RootStateType
+//     getState: () => RootStateType
+//     renderEntireTree: () => void
+//     subscribe: (observer: () => void) => void
+//     dispatch: (action: ActionsType) => void
+// }
 
 
 export default store;

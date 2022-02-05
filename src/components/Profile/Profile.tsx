@@ -5,7 +5,7 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
 
-export function Profile() {
+export function Profile(props: any ) {
 
     return (
         <div>
