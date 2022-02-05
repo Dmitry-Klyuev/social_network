@@ -16,6 +16,7 @@ export type RootStateType = {
     profilePage: {
         postsData: Array<PostDataType>
         newPostText: string
+        profile: null
     }
     dialogsPage: {
         dialogs: Array<DialogsType>
@@ -55,5 +56,9 @@ export type SendMessageCreatorType = {
 export type UpdateNewMessageBodyCreatorType = {
     type: 'UPDATE-NEW-MESSAGE'
     body: string
+}
+export type SetUserProfileActionType = {
+    type: 'SET_USER_PROFILE'
+    profile: any
 }
 

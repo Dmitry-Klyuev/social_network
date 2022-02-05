@@ -13,7 +13,8 @@ import {connect} from "react-redux";
 import {Preloader} from "../common/Preloader/Preloader";
 
 type MapStateToPropsType = {
-    usersPage: UsersStateType
+    usersPage: UsersStateType,
+
 }
 
 type MapDispatchToPropsType = {

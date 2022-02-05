@@ -51,6 +51,7 @@ export type UsersStateType = {
     isFetching: boolean
 }
 
+
 export type usersActionType = ReturnType<typeof follow>
     | ReturnType<typeof unfollow>
     | ReturnType<typeof setUsers>
@@ -58,7 +59,7 @@ export type usersActionType = ReturnType<typeof follow>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof setIsFetching>
 
-let initialState: UsersStateType = {
+let initialState:UsersStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,

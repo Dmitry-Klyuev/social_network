@@ -2,7 +2,7 @@ import {
     DispatchAddPostType,
     DispatchUpdatePostType,
     RootStateType,
-    SendMessageCreatorType, UpdateNewMessageBodyCreatorType,
+    SendMessageCreatorType, SetUserProfileActionType, UpdateNewMessageBodyCreatorType,
 } from "./types";
 import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogReducer";
@@ -16,6 +16,7 @@ export let store: StoreType = {
                 {id: 2, message: 'My name is Gena', likesCount: 15},
             ],
             newPostText: '',
+            profile: null
         },
         dialogsPage: {
             dialogs: [
@@ -52,7 +53,7 @@ export let store: StoreType = {
     }
 }
 
-export type DispatchActionType = DispatchAddPostType | DispatchUpdatePostType | SendMessageCreatorType | UpdateNewMessageBodyCreatorType
+export type DispatchActionType = DispatchAddPostType | DispatchUpdatePostType | SendMessageCreatorType | UpdateNewMessageBodyCreatorType | SetUserProfileActionType
 
 
 export type StoreType = {
